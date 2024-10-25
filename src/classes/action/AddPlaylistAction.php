@@ -1,10 +1,8 @@
 <?php
-
 namespace iutnc\deefy\action;
 
 use iutnc\deefy\action\Action;
 use iutnc\deefy\audio\lists\PlayList;
-use iutnc\deefy\audio\tracks\AlbumTrack;
 use iutnc\deefy\render\AudioListRenderer;
 
 class AddPlaylistAction extends Action {
@@ -23,9 +21,18 @@ class AddPlaylistAction extends Action {
             </form>
             FIN;
         } else {
-            $nom = filter_var($_POST["nom"], FILTER_SANITIZE_SPECIAL_CHARS);
-            $_SESSION['Playlist'] = new Playlist($nom, array());
-            $renderer = new AudioListRenderer($_SESSION['Playlist']);
+            $nom = filter_var($_POST["nom"], FILTER_SANITIZE_SPECIAL_CHARS); 
+
+            $playlist = new Playlist($nom, array());
+
+           
+            if (!isset($_SESSION['playlists'])) {
+                $_SESSION['playlists'] = [];
+            }
+            $_SESSION['playlists'][] = $playlist;
+
+
+            $renderer = new AudioListRenderer($playlist);
             $html = $renderer->render();
         }
         return $html;
