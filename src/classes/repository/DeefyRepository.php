@@ -42,7 +42,7 @@ class DeefyRepository {
     private function __construct() {
 
         $host = 'localhost';
-        $db = 'base_php';
+        $db = 'deefy_musique';
         $user = 'root';
         $pass = ''; 
         
