@@ -72,7 +72,7 @@ class AddPodcastTrackAction extends Action {
                 unset($_SESSION["Playlist"]);
                 $_SESSION["Playlist"] = $playlist;
                 $renderer = new AudioListRenderer($_SESSION['Playlist']);
-                $html = $html . $renderer->render(); // si un fichier a été upload, $html existe deja
+                $html = $html . $renderer->render(); 
             } else {
                 $html = <<<FIN
                 <div>
