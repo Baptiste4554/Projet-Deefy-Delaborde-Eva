@@ -40,20 +40,17 @@ class DeefyRepository {
      * Constructeur privé pour initialiser la connexion PDO
      */
     private function __construct() {
-        if (empty(self::$config)) {
-            throw new \RuntimeException("La configuration de la base de données est absente.");
-        }
 
+        $host = 'localhost';
+        $db = 'base_php';
+        $user = 'root';
+        $pass = ''; 
+        
         try {
-            $dsn = sprintf(
-                "mysql:host=%s;dbname=%s;charset=utf8",
-                self::$config['host'],
-                self::$config['dbname']
-            );
-            $this->pdo = new PDO($dsn, self::$config['username'], self::$config['password']);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            throw new \RuntimeException("Erreur de connexion à la base de données : " . $e->getMessage());
+            echo "Erreur connexion : " . $e->getMessage();
         }
     }
 
@@ -68,4 +65,40 @@ class DeefyRepository {
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getAllPlaylists(): array {
+        $stmt = $this->pdo->query("SELECT id, nom FROM playlist");
+        $playlists = [];
+    
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $playlists[] = new \iutnc\deefy\model\Playlist($row['id'], $row['nom']);
+        }
+    
+        return $playlists;
+    }
+
+    public function saveEmptyPlaylist(string $nom): bool {
+        $stmt = $this->pdo->prepare("INSERT INTO playlist (nom) VALUES (:nom)");
+        return $stmt->execute(['nom' => $nom]);
+    }
+
+    public function saveTrack(\iutnc\deefy\model\Track $track): bool {
+        $stmt = $this->pdo->prepare("INSERT INTO track (titre, genre, duree, filename) VALUES (:titre, :genre, :duree, :filename)");
+        return $stmt->execute([
+            'titre' => $track->titre,
+            'genre' => $track->genre,
+            'duree' => $track->duree,
+            'filename' => $track->filename
+        ]);
+    }
+
+    public function addTrackToPlaylist(int $idTrack, int $idPlaylist): bool {
+        $stmt = $this->pdo->prepare("INSERT INTO playlist2track (id_pl, id_track, no_piste_dans_liste) 
+                                     VALUES (:id_pl, :id_track, 
+                                     (SELECT COALESCE(MAX(no_piste_dans_liste) + 1, 1) 
+                                      FROM playlist2track WHERE id_pl = :id_pl))");
+        return $stmt->execute(['id_pl' => $idPlaylist, 'id_track' => $idTrack]);
+    }
+    
+    
 }
