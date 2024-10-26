@@ -1,7 +1,8 @@
 <?php
+
 namespace iutnc\deefy\action;
 
-use iutnc\deefy\action\Action;
+use iutnc\deefy\repository\DeefyRepository;
 use iutnc\deefy\audio\lists\PlayList;
 use iutnc\deefy\render\AudioListRenderer;
 
@@ -9,6 +10,7 @@ class AddPlaylistAction extends Action {
 
     public function execute(): string {
         if ($this->http_method === 'GET') {
+
             $html = <<<FIN
             <form action="?action=add-playlist" method="post">
               <div>
@@ -21,10 +23,17 @@ class AddPlaylistAction extends Action {
             </form>
             FIN;
         } else {
-           $nom = filter_var($_POST["nom"], FILTER_SANITIZE_SPECIAL_CHARS);
-           $_SESSION['Playlist'] = new Playlist($nom, array());
-           $renderer = new AudioListRenderer($_SESSION['Playlist']);
-           $html = $renderer->render();
+            $nom = filter_var($_POST["nom"], FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $repo = DeefyRepository::getInstance();
+            $playlistId = $repo->saveEmptyPlaylist($nom);
+
+            $playlist = new Playlist($nom, []);
+
+            $_SESSION['Playlist'] = $playlist;
+
+            $renderer = new AudioListRenderer($playlist);
+            $html = $renderer->render();
         }
         return $html;
     }

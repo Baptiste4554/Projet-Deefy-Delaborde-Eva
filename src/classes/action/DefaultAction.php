@@ -16,7 +16,7 @@ class DefaultAction extends Action {
     <li><strong>?action=add-playlist</strong> : Permet d'ajouter une nouvelle playlist.</li>
     <li><strong>?action=add-track</strong> : Permet d'ajouter une chanson ou un podcast.</li>
 </ul>
-<p>Le dispatcher détecte l'action dans l'URL, instancie la classe correspondante, exécute sa méthode <code>execute()</code>, et affiche le résultat à l'aide de la méthode <code>renderPage()</code>.</p>
+
 HTML;
     }
 }
