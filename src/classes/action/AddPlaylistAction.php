@@ -27,7 +27,8 @@ class AddPlaylistAction extends Action {
 
             $repo = DeefyRepository::getInstance();
             $playlistId = $repo->saveEmptyPlaylist($nom);
-
+            
+            $_SESSION['playlistId'] = $playlistId;
             $playlist = new Playlist($nom, []);
 
             $_SESSION['Playlist'] = $playlist;

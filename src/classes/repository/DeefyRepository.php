@@ -49,14 +49,23 @@ class DeefyRepository {
         return (int)$this->pdo->lastInsertId();
     }
 
-      public function saveTrack(string $titre, string $genre, int $duree, string $file): int {
-        $stmt = $this->pdo->prepare("INSERT INTO track (titre, genre, duree, file) VALUES (:titre, :genre, :duree, :file)");
-        $stmt->execute(['titre' => $titre, 'genre' => $genre, 'duree' => $duree, 'file' => $file]);
+    public function saveTrack($titre, $genre, $duree, $filename, $auteur, $date): int {
+        $query = "INSERT INTO track (titre, genre, duree, filename, auteur_podcast, date_posdcast) 
+                  VALUES (:titre, :genre, :duree, :filename, :auteur, :date)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':titre', $titre);
+        $stmt->bindParam(':genre', $genre);
+        $stmt->bindParam(':duree', $duree);
+        $stmt->bindParam(':filename', $filename);
+        $stmt->bindParam(':auteur', $auteur);
+        $stmt->bindParam(':date', $date);
+        $stmt->execute();
         return (int)$this->pdo->lastInsertId();
     }
+    
 
       public function addTrackToPlaylist(int $playlistId, int $trackId): void {
-        $stmt = $this->pdo->prepare("INSERT INTO playlist2track (pl_id, tr_id) VALUES (:playlistId, :trackId)");
+        $stmt = $this->pdo->prepare("INSERT INTO playlist2track (id_pl,id_track) VALUES (:playlistId, :trackId)");
         $stmt->execute(['playlistId' => $playlistId, 'trackId' => $trackId]);
     }
 }

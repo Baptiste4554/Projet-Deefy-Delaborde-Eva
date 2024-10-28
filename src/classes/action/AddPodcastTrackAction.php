@@ -3,8 +3,7 @@
 namespace iutnc\deefy\action;
 
 use iutnc\deefy\action\Action;
-use iutnc\deefy\audio\lists\PlayList;
-use iutnc\deefy\audio\tracks\AlbumTrack;
+use iutnc\deefy\repository\DeefyRepository;
 use iutnc\deefy\audio\tracks\PodcastTrack;
 use iutnc\deefy\render\AudioListRenderer;
 
@@ -27,7 +26,7 @@ class AddPodcastTrackAction extends Action {
                 <label for="date">Entrez date: </label>
                 <input type="date" name="date" id="date" />
                 
-                <label for ="genre">Entrez genre: </label>
+                <label for="genre">Entrez genre: </label>
                 <input type="text" name="genre" id="genre" />
                 
                 <label for="duree">Entrez duree (en seconde): </label>
@@ -60,11 +59,14 @@ class AddPodcastTrackAction extends Action {
                 if (move_uploaded_file($tmp, $dest)) {
                     $html = "<div>Upload ok</div>";
                 } else {
-                    $html ="<div>Upload fail</div>";
+                    $html = "<div>Upload fail</div>";
                 }
             } else {
-                $html = ("<div>Upload fail: mp3 requis</div>");
+                $html = "<div>Upload fail: mp3 requis</div>";
             }
+            $repo = DeefyRepository::getInstance();
+            $trackID = $repo ->saveTrack($titre, $genre, $duree, $file_name . ".mp3", $auteur, $date);
+            
 
             if (isset($_SESSION["Playlist"])) {
                 $playlist = $_SESSION["Playlist"];
@@ -72,9 +74,11 @@ class AddPodcastTrackAction extends Action {
                 unset($_SESSION["Playlist"]);
                 $_SESSION["Playlist"] = $playlist;
                 $renderer = new AudioListRenderer($_SESSION['Playlist']);
-                $html = $html . $renderer->render(); 
+                $playlistId = $_SESSION['playlistId']; 
+                $repo->addTrackToPlaylist($playlistId, $trackID);
+                $html .= $renderer->render(); 
             } else {
-                $html = <<<FIN
+                $html .= <<<FIN
                 <div>
                     <p>Il n'y a pas de playlist enregistrée</p>
                 </div>
