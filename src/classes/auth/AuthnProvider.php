@@ -22,18 +22,14 @@ class AuthnProvider {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new AuthnException("Email invalide.");
         }
-
         $repo = DeefyRepository::getInstance();
         $stmt = $repo->getPDO()->prepare("SELECT COUNT(*) FROM user WHERE email = :email");
         $stmt->execute(['email' => $email]);
         $exists = $stmt->fetchColumn();
-
         if ($exists) {
             throw new AuthnException("Email déjà utilisé.");
         }
-
         $hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
-        
         $stmt = $repo->getPDO()->prepare("INSERT INTO user (email, passwd, role) VALUES (:email, :passwd, :role)");
         $stmt->execute([
             'email' => $email,

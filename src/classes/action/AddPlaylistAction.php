@@ -11,7 +11,7 @@ class AddPlaylistAction extends Action {
     public function execute(): string {
         if ($this->http_method === 'GET') {
 
-            $html = <<<FIN
+            $html = <<<HTML
             <form action="?action=add-playlist" method="post">
               <div>
                 <label for="name">Entrez nom playlist: </label>
@@ -21,7 +21,7 @@ class AddPlaylistAction extends Action {
                 <input type="submit" value="Valider" />
               </div>
             </form>
-            FIN;
+            HTML;
         } else {
             $nom = filter_var($_POST["nom"], FILTER_SANITIZE_SPECIAL_CHARS);
 

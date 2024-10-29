@@ -8,8 +8,7 @@ use iutnc\deefy\AuthnException;
 class AddUserAction extends Action {
     public function execute(): string {
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'add-user') {
-        // Afficher le formulaire d'inscription
-        $html = <<<FIN
+        $html = <<<HTML
         <form method="POST" action="Main.php?action=add-user">
             <label for="email">Email :</label>
             <input type="email" id="email" name="email" required>
@@ -19,10 +18,9 @@ class AddUserAction extends Action {
             <input type="password" id="confirm_passwd" name="confirm_passwd" required>
             <button type="submit">S'inscrire</button>
         </form>
-        FIN;
+        HTML;
 
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'add-user') {
-            // Traiter l'inscription
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $password = $_POST['passwd'];
             $confirmPassword = $_POST['confirm_passwd'];
