@@ -5,7 +5,7 @@ namespace iutnc\deefy\auth;
 use iutnc\deefy\AuthnException;
 use iutnc\deefy\repository\DeefyRepository;
 
-class AuthProvider {
+class AuthnProvider {
  
     // solidité mot de passe
     public static function checkPasswordStrength(string $pass, int $minimumLength = 10): bool {

@@ -35,14 +35,17 @@ class Dispatcher {
                 break;
             case 'accueil';
                 $actionObjet = new AccueilAction();
+                break;
             case 'signin';
                 $actionObjet = new SigninAction();
+                break;
             case 'add-user';
                 $actionObjet = new AddUserAction();
+                break;
             default:
                 $actionObjet = new DefaultAction();
                 break;
-        }
+        }   
         $html = $actionObjet->execute();
         $this->renderPage($html);
     }
@@ -59,9 +62,8 @@ class Dispatcher {
             <h1>Deefy App</h1>
             <nav>
                 <ul>
-                    <li><a href="./Main.php">Accueil</a></li>
-                    <li><a href="?action=add-user">Ajoute user</a></li>
-                    <li><a href="?action=signin">se connecter</a></li>
+                    <li><a href="?action=add-user">S'inscrire</a></li>
+                    <li><a href="?action=signin">Se connecter</a></li>
                 </ul>
             </nav>
             $html

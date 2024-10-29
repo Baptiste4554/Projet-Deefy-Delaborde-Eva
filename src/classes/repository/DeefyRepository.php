@@ -68,4 +68,8 @@ class DeefyRepository {
         $stmt = $this->pdo->prepare("INSERT INTO playlist2track (id_pl,id_track) VALUES (:playlistId, :trackId)");
         $stmt->execute(['playlistId' => $playlistId, 'trackId' => $trackId]);
     }
+
+    public function getPDO(): PDO {
+        return $this->pdo;
+    }
 }
