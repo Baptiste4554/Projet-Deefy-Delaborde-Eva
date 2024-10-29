@@ -6,6 +6,9 @@ use iutnc\deefy\action\AddPlaylistAction;
 use iutnc\deefy\action\AddPodcastTrackAction;
 use iutnc\deefy\action\DefaultAction;
 use iutnc\deefy\action\DisplayPlaylistAction;
+use iutnc\deefy\action\SigninAction;
+use iutnc\deefy\action\AddUserAction;
+use iutnc\deefy\action\AccueilAction;
 
 class Dispatcher {
 
@@ -30,6 +33,12 @@ class Dispatcher {
             case 'add-track':
                 $actionObjet = new AddPodcastTrackAction();
                 break;
+            case 'accueil';
+                $actionObjet = new AccueilAction();
+            case 'signin';
+                $actionObjet = new SigninAction();
+            case 'add-user';
+                $actionObjet = new AddUserAction();
             default:
                 $actionObjet = new DefaultAction();
                 break;
@@ -44,16 +53,15 @@ class Dispatcher {
         <html lang='fr'>
         <head>
             <meta charset='utf-8'>
-            <title>Exemple</title>
+            <title>deefy</title>
         </head>
         <body>
             <h1>Deefy App</h1>
             <nav>
                 <ul>
                     <li><a href="./Main.php">Accueil</a></li>
-                    <li><a href="?action=playlist">Affiche playlist</a></li>
-                    <li><a href="?action=add-playlist">Ajoute playlist</a></li>
-                    <li><a href="?action=add-track">Ajoute piste</a></li>
+                    <li><a href="?action=add-user">Ajoute user</a></li>
+                    <li><a href="?action=signin">se connecter</a></li>
                 </ul>
             </nav>
             $html
