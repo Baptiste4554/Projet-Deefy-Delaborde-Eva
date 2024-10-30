@@ -4,7 +4,7 @@ namespace iutnc\deefy\action;
 
 use iutnc\deefy\repository\DeefyRepository;
 use iutnc\deefy\auth\AuthnProvider;
-use iutnc\deefy\AuthnException;
+use iutnc\deefy\exception\AuthnException;
 
 
 class SigninAction extends Action {

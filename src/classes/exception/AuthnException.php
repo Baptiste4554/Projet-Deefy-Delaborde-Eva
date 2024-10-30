@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\deefy;
+namespace iutnc\deefy\exception;
 
 use Exception;
 

@@ -2,7 +2,7 @@
 
 namespace iutnc\deefy\auth;
 
-use iutnc\deefy\AuthnException;
+use iutnc\deefy\exception\AuthnException;
 use iutnc\deefy\repository\DeefyRepository;
 
 class AuthnProvider {
