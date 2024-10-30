@@ -18,6 +18,16 @@ class AddUserAction extends Action {
             <input type="password" id="confirm_passwd" name="confirm_passwd" required>
             <button type="submit">S'inscrire</button>
         </form>
+        <nav>
+                <ul>
+                    <li>Le mot de passe doit contenir au moins : </li>
+                    <li>10 caractères</li>
+                    <li>un chiffre</li>
+                    <li>un caractère spécial</li>
+                    <li>une majuscule</li>
+                    <li>une minuscule</li>
+                </ul>
+            </nav>
         HTML;
 
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'add-user') {

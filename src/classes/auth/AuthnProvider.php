@@ -19,6 +19,9 @@ class AuthnProvider {
 
     // enregister un nouveau utilisateur
     public static function register(string $email, string $password): void {
+        if (!self::checkPasswordStrength($password)) {
+            throw new AuthnException("Mot de passe invalide.");
+        }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new AuthnException("Email invalide.");
         }

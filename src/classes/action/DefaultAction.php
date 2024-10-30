@@ -13,7 +13,7 @@ class DefaultAction extends Action {
                     <li><a href="?action=add-user">S'inscrire</a></li>
                     <li><a href="?action=signin">Se connecter</a></li>
                 </ul>
-            </nav>
+        </nav>
         <h2>Bienvenue sur Deefy</h2>
         <p>Vous etes sur la page d'accueil par défaut. Le système de dispatching vous permet de naviguer vers différentes fonctionnalités en fonction de l'action spécifiée dans l'URL.</p>
         <p>Voici les actions disponibles que vous pouvez utiliser :</p>
