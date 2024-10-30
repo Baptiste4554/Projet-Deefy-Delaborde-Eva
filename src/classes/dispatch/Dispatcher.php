@@ -60,12 +60,6 @@ class Dispatcher {
         </head>
         <body>
             <h1>Deefy App</h1>
-            <nav>
-                <ul>
-                    <li><a href="?action=add-user">S'inscrire</a></li>
-                    <li><a href="?action=signin">Se connecter</a></li>
-                </ul>
-            </nav>
             $html
         </body>
         </html>

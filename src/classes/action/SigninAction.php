@@ -29,6 +29,7 @@ class SigninAction extends Action {
                 <p>Vous êtes connecté</p>
                 <a href="?action=accueil">Accueil</a>
                 HTML;
+                $_SESSION['user'] = $email; 
             } catch (AuthnException $e) {
                 $html = "Erreur d'authentification : " . $e->getMessage();
             }
