@@ -24,7 +24,9 @@ class SigninAction extends Action {
             $password = $_POST['passwd'];
 
             try {
-                AuthnProvider::signin($email, $password);
+                $userId = AuthnProvider::signin($email, $password);
+                $_SESSION['user_id'] = $userId;
+                $_SESSION['user'] = $email;
                 $html = <<<HTML
                 <p>Vous êtes connecté</p>
                 <a href="?action=accueil">Accueil</a>

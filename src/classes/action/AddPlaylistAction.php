@@ -1,5 +1,4 @@
 <?php
-
 namespace iutnc\deefy\action;
 
 use iutnc\deefy\repository\DeefyRepository;
@@ -27,10 +26,14 @@ class AddPlaylistAction extends Action {
 
             $repo = DeefyRepository::getInstance();
             $playlistId = $repo->saveEmptyPlaylist($nom);
-            
+
+            if (isset($_SESSION['user_id'])) {
+                $userId = $_SESSION['user_id'];
+                $repo->addUserToPlaylist($userId, $playlistId);
+            }
+
             $_SESSION['playlistId'] = $playlistId;
             $playlist = new Playlist($nom, []);
-
             $_SESSION['Playlist'] = $playlist;
 
             $renderer = new AudioListRenderer($playlist);
