@@ -64,10 +64,16 @@ class DeefyRepository {
     }
     
 
-      public function addTrackToPlaylist(int $playlistId, int $trackId): void {
-        $stmt = $this->pdo->prepare("INSERT INTO playlist2track (id_pl,id_track) VALUES (:playlistId, :trackId)");
-        $stmt->execute(['playlistId' => $playlistId, 'trackId' => $trackId]);
+    public function addTrackToPlaylist(int $playlistId, int $trackId): void {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM playlist2track WHERE id_pl = :playlistId");
+        $stmt->execute(['playlistId' => $playlistId]);
+        $compteur = $stmt->fetchColumn();
+        $noPisteDansListe = $compteur + 1;
+        $stmt = $this->pdo->prepare("
+            INSERT INTO playlist2track (id_pl, id_track, no_piste_dans_liste)  VALUES (:playlistId, :trackId, :noPisteDansListe)");
+        $stmt->execute(['playlistId' => $playlistId,'trackId' => $trackId,'noPisteDansListe' => $noPisteDansListe]);
     }
+
     public function addUserToPlaylist(int $userId, int $playlistId): void {
         $stmt = $this->getPDO()->prepare("INSERT INTO user2playlist (id_user, id_pl) VALUES (:id_user, :id_pl)");
         $stmt->execute(['id_user' => $userId,'id_pl' => $playlistId]);
