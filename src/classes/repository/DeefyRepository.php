@@ -4,7 +4,10 @@ namespace iutnc\deefy\repository;
 
 use PDO;
 use Exception;
-
+use iutnc\deefy\audio\lists\PlayList;
+use iutnc\deefy\audio\tracks\AudioTrack;
+use iutnc\deefy\audio\tracks\PodcastTrack;
+use iutnc\deefy\render\AudioListRenderer;
 class DeefyRepository {
     private PDO $pdo;
     private static ?DeefyRepository $instance = null;
@@ -49,9 +52,9 @@ class DeefyRepository {
         return (int)$this->pdo->lastInsertId();
     }
 
-    public function saveTrack($titre, $genre, $duree, $filename, $auteur, $date): int {
-        $query = "INSERT INTO track (titre, genre, duree, filename, auteur_podcast, date_posdcast) 
-                  VALUES (:titre, :genre, :duree, :filename, :auteur, :date)";
+    public function saveTrack($titre, $genre, $duree, $filename, $auteur, $date, $type): int {
+        $query = "INSERT INTO track (titre, genre, duree, filename, auteur_podcast, date_posdcast, type) 
+                  VALUES (:titre, :genre, :duree, :filename, :auteur, :date, :type)";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':titre', $titre);
         $stmt->bindParam(':genre', $genre);
@@ -59,9 +62,11 @@ class DeefyRepository {
         $stmt->bindParam(':filename', $filename);
         $stmt->bindParam(':auteur', $auteur);
         $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':type', $type); 
         $stmt->execute();
         return (int)$this->pdo->lastInsertId();
     }
+    
     
 
     public function addTrackToPlaylist(int $playlistId, int $trackId): void {
@@ -78,8 +83,39 @@ class DeefyRepository {
         $stmt = $this->getPDO()->prepare("INSERT INTO user2playlist (id_user, id_pl) VALUES (:id_user, :id_pl)");
         $stmt->execute(['id_user' => $userId,'id_pl' => $playlistId]);
     }
-    
 
+    public function findPlaylistById(int $playlistId): ?PlayList {
+        $stmt = $this->pdo->prepare("SELECT * FROM playlist WHERE id = :playlistId");
+        $stmt->execute(['playlistId' => $playlistId]);
+        $playlistData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$playlistData) {
+            return null;
+        }
+        $playlist = new PlayList($playlistData['nom'], []);
+        $stmt = $this->pdo->prepare("
+            SELECT t.* FROM track t
+            JOIN playlist2track p2t ON t.id = p2t.id_track
+            WHERE p2t.id_pl = :playlistId
+            ORDER BY p2t.no_piste_dans_liste
+        ");
+        $stmt->execute(['playlistId' => $playlistId]);
+        $tracks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($tracks as $trackData) {
+            $track = new PodcastTrack(
+                $trackData['titre'],
+                $trackData['filename'],
+                $trackData['auteur_podcast'] ?? 'inconnuAuteur',
+                $trackData['date_posdcast'] ?? 'inconnuDate',
+                $trackData['genre'],
+                (int)$trackData['duree']
+            );
+            $playlist->ajouterPiste($track);
+        }
+
+        return $playlist;
+    }
 
     public function getPDO(): PDO {
         return $this->pdo;

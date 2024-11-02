@@ -65,7 +65,7 @@ class AddPodcastTrackAction extends Action {
                 $html = "<div>Upload fail: mp3 requis</div>";
             }
             $repo = DeefyRepository::getInstance();
-            $trackID = $repo ->saveTrack($titre, $genre, $duree, $file_name . ".mp3", $auteur, $date);
+            $trackID = $repo->saveTrack($titre, $genre, $duree, $file_name . ".mp3", $auteur, $date, 'P');
             
 
             if (isset($_SESSION["Playlist"])) {

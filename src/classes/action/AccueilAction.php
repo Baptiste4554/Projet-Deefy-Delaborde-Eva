@@ -12,7 +12,8 @@ class AccueilAction extends Action {
             <nav>
                 <ul>
                     <li><a href="./Main.php">déconnection</a></li>
-                    <li><a href="?action=playlist">Affiche playlist</a></li>
+                    <li><a href="?action=playlist">Affiche toutes les playlists</a></li>
+                    <li><a href="?action=displayplaylist">Affiche les pistes d'une playlist</a></li>
                     <li><a href="?action=add-playlist">Ajoute playlist</a></li>
                     <li><a href="?action=add-track">Ajoute piste</a></li>
                 </ul>
