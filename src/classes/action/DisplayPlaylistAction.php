@@ -15,7 +15,7 @@ class DisplayPlaylistAction extends Action {
 
         $html = "<h2>Liste des playlists :</h2><ul>";
         foreach ($playlists as $playlist) {
-            $html .= "<li>" . htmlspecialchars($playlist['nom']) . "</li>"; 
+            $html .= "<li>" . htmlspecialchars($playlist['nom']) ."   -ID: ".htmlspecialchars($playlist['id']). "</li>";
         }
 
         $html .= "</ul>";
