@@ -6,7 +6,6 @@ use iutnc\deefy\repository\DeefyRepository;
 use iutnc\deefy\auth\AuthnProvider;
 use iutnc\deefy\exception\AuthnException;
 
-
 class SigninAction extends Action {
     public function execute(): string {
         if ($_SERVER['REQUEST_METHOD'] === 'GET'){
@@ -26,17 +25,15 @@ class SigninAction extends Action {
             try {
                 $userId = AuthnProvider::signin($email, $password);
                 $_SESSION['user_id'] = $userId;
-                $_SESSION['user'] = $email;
+                $_SESSION['user'] = serialize(['email' => $email]); // Ensure the user data is serialized
                 $html = <<<HTML
                 <p>Vous êtes connecté</p>
                 <a href="?action=accueil">Accueil</a>
                 HTML;
-                $_SESSION['user'] = $email; 
             } catch (AuthnException $e) {
                 $html = "Erreur d'authentification : " . $e->getMessage();
             }
         }
         return  $html;
-
     }
 }
