@@ -17,7 +17,7 @@ class DisplayPlaylistIDAction {
                 $playlist = $repository->findPlaylistById($playlistId);
                 if ($playlist) {
                     $renderer = new AudioListRenderer($playlist);
-                    return $renderer->render();
+                    return $renderer->render(2);
                 } else {
                     return "<p>Playlist not found.</p>";
                 }
