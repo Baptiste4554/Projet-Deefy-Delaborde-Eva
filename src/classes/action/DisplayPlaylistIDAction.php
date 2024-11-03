@@ -31,6 +31,9 @@ class DisplayPlaylistIDAction {
                 <label for="playlistId">Entrer un numéro de playlist (ID):</label>
                 <input type="text" id="playlistId" name="id" required>
                 <button type="submit">Display Playlist</button>
+                <nav>
+                    <a href="?action=accueil">Retour</a>
+                </nav>
             </form>
             HTML;
         }

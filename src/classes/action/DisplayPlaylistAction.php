@@ -19,6 +19,6 @@ class DisplayPlaylistAction extends Action {
         }
 
         $html .= "</ul>";
-        return $html;
+        return $html .= "<nav><a href=\"?action=accueil\">Retour</a></nav>";
     }
 }

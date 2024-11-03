@@ -43,14 +43,14 @@ class AuthnProvider {
 
 
     // authentification d'un utilisateur
-    public static function signin(string $email, string $passwd2check): int {
+    public static function signin(string $email, string $password): int {
         $repo = DeefyRepository::getInstance();
         $stmt = $repo->getPDO()->prepare("SELECT id, passwd FROM user WHERE email = :email");
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch();
     
 
-        if (!$user || !password_verify($passwd2check, $user['passwd'])) {
+        if (!$user || !password_verify($password, $user['passwd'])) {
             throw new AuthnException("Erreur d'authentification : identifiants invalides.");
         }
 

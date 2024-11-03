@@ -19,6 +19,9 @@ class AddPlaylistAction extends Action {
               <div>
                 <input type="submit" value="Valider" />
               </div>
+              <nav>
+                <a href="?action=accueil">Retour</a>
+              </nav>
             </form>
             HTML;
         } else {

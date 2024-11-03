@@ -25,7 +25,7 @@ class SigninAction extends Action {
             try {
                 $userId = AuthnProvider::signin($email, $password);
                 $_SESSION['user_id'] = $userId;
-                $_SESSION['user'] = serialize(['email' => $email]); // Ensure the user data is serialized
+                $_SESSION['user'] = serialize(['email' => $email]); 
                 $html = <<<HTML
                 <p>Vous êtes connecté</p>
                 <a href="?action=accueil">Accueil</a>

@@ -85,6 +85,6 @@ class AddPodcastTrackAction extends Action {
                 FIN;
             }
         }
-        return $html;
+        return $html .= "<nav><a href=\"?action=accueil\">Retour</a></nav>";
     }
 }
