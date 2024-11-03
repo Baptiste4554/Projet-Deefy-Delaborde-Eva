@@ -1,0 +1,82 @@
+.tout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px; 
+    text-align: center;
+}
+
+.container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.container label {
+    display: block;
+    margin-top: 10px;
+    text-align: left;
+    font-weight: bold;
+    color: #333;
+}
+
+.container input[type="email"],
+.container input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.container button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #7a7a7a;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container button:hover {
+    background-color: #5a5a5a;
+}
+
+.container nav ul {
+    padding: 0;
+    margin-top: 15px;
+    text-align: left;
+    color: #666;
+    font-size: 14px;
+}
+
+.container nav ul li {
+    margin-bottom: 5px;
+}
+
+.footer {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+

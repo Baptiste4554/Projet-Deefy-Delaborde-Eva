@@ -13,7 +13,7 @@ class DisplayPlaylistAction extends Action {
         $_SESSION['playlists'] = $playlists;
 
 
-        $html = "<h2>Liste des playlists :</h2><ul>";
+        $html = "<link rel=\"stylesheet\" href=\"src/css.css\"> <h2>Liste des playlists :</h2><ul>";
         foreach ($playlists as $playlist) {
             $html .= "<li>" . htmlspecialchars($playlist['nom']) ."   -ID: ".htmlspecialchars($playlist['id']). "</li>";
         }

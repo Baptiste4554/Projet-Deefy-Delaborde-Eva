@@ -11,8 +11,9 @@ class AddPodcastTrackAction extends Action {
 
     public function execute(): string {
         if ($this->http_method === 'GET') {
-            $html = <<<FIN
+            $html = <<<HTML
             <form action="?action=add-track" method="post" enctype="multipart/form-data">
+              <link rel="stylesheet" href="src/css.css">
               <div>
                 <label for="titre">Entrez titre: </label>
                 <input type="text" name="titre" id="titre" required />
@@ -39,7 +40,7 @@ class AddPodcastTrackAction extends Action {
                 <input type="submit" value="Valider" />
               </div>
             </form>
-            FIN;
+            HTML;
         } else {
             $titre = filter_var($_POST["titre"], FILTER_SANITIZE_SPECIAL_CHARS);
             $chemin = filter_var($_POST["chemin"], FILTER_SANITIZE_SPECIAL_CHARS);

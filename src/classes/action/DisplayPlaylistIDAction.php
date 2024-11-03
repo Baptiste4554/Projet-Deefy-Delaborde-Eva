@@ -22,15 +22,19 @@ class DisplayPlaylistIDAction {
                     return "<p>Playlist not found.</p>";
                 }
             } catch (AuthnException $e) {
-                return "<p>Accès refusé : vous n'êtes pas le propriétaire de cette playlist.</p>";
+                return "<p>Accès refusé : vous n'êtes pas le propriétaire de cette playlist.</p>
+                <nav>
+                    <a href=\"?action=accueil\">Retour</a>
+                </nav>";
             }
         } else {
             return <<<HTML
             <form method="GET" action="Main.php">
+                <link rel="stylesheet" href="src/css.css">
                 <input type="hidden" name="action" value="displayplaylist">
                 <label for="playlistId">Entrer un numéro de playlist (ID):</label>
                 <input type="text" id="playlistId" name="id" required>
-                <button type="submit">Display Playlist</button>
+                <button type="submit">Afficher</button>
                 <nav>
                     <a href="?action=accueil">Retour</a>
                 </nav>

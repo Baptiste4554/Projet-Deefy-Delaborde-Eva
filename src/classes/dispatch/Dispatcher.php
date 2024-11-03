@@ -55,18 +55,19 @@ class Dispatcher {
     }
 
     private function renderPage(String $html) : void {
-        echo <<<FIN
+        echo <<<HTML
         <!DOCTYPE html>
         <html lang='fr'>
         <head>
             <meta charset='utf-8'>
             <title>deefy</title>
+            <link rel="stylesheet" href="src/css.css">
         </head>
         <body>
             <h1>Deefy App</h1>
             $html
         </body>
         </html>
-        FIN;
+        HTML;
     }
 }

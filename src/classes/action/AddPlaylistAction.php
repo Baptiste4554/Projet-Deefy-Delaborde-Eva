@@ -12,6 +12,7 @@ class AddPlaylistAction extends Action {
 
             $html = <<<HTML
             <form action="?action=add-playlist" method="post">
+              <link rel="stylesheet" href="src/css.css">
               <div>
                 <label for="name">Entrez nom playlist: </label>
                 <input type="text" name="nom" id="name" required />
