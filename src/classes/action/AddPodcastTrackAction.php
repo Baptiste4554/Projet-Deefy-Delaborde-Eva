@@ -19,32 +19,35 @@ class AddPodcastTrackAction extends Action {
     private function renderForm(): string {
         return <<<HTML
         <form action="?action=add-track" method="post" enctype="multipart/form-data">
-          <link rel="stylesheet" href="src/css.css">
-          <div>
-            <label for="titre">Entrez titre: </label>
-            <input type="text" name="titre" id="titre" required />
+        <link rel="stylesheet" href="src/css.css">
+        <div>
+        <label for="titre">Entrez titre: </label>
+        <input type="text" name="titre" id="titre" required />
 
-            <label for="chemin">Entrez chemin: </label>
-            <input type="text" name="chemin" id="chemin" required />
+        <label for="chemin">Entrez chemin: </label>
+        <input type="text" name="chemin" id="chemin" required />
 
-            <label for="auteur">Entrez auteur: </label>
-            <input type="text" name="auteur" id="auteur" />
+        <label for="auteur">Entrez auteur: </label>
+        <input type="text" name="auteur" id="auteur" />
 
-            <label for="date">Entrez date: </label>
-            <input type="date" name="date" id="date" />
+        <label for="date">Entrez date: </label>
+        <input type="date" name="date" id="date" />
 
-            <label for="genre">Entrez genre: </label>
-            <input type="text" name="genre" id="genre" />
+        <label for="genre">Entrez genre: </label>
+        <input type="text" name="genre" id="genre" />
 
-            <label for="duree">Entrez duree (en seconde): </label>
-            <input type="text" name="duree" id="duree" />
+        <label for="duree">Entrez duree (en seconde): </label>
+        <input type="text" name="duree" id="duree" />
 
-            <label for="fichier">Ajouter fichier: </label>
-            <input type="file" name="fichier" id="fichier" />
-          </div>
-          <div>
-            <input type="submit" value="Valider" />
-          </div>
+        <label for="fichier">Ajouter fichier: </label>
+        <input type="file" name="fichier" id="fichier" />
+        </div>
+        <div>
+        <input type="submit" value="Valider" />
+        </div>
+        <nav>
+            <a href="?action=accueil">Retour</a>
+        </nav>
         </form>
         HTML;
     }
@@ -52,7 +55,12 @@ class AddPodcastTrackAction extends Action {
     private function verifAjoutTrack(): string {
         if (!isset($_SESSION["Playlist"])) {
             return $html= <<<HTML
-            <div><p>Il n'y a pas de playlist enregistrée</p></div><nav><a href="?action=accueil">Retour</a></nav>
+            <div>
+                <p>Il n'y a pas de playlist enregistrée</p>
+            </div>
+            <nav>
+                <a href="?action=accueil">Retour</a>
+            </nav>
             HTML;
         }
 
