@@ -23,12 +23,13 @@ class DeconnectionAction extends Action {
             </form>
             HTML;
         } else {
-            session_destroy();  
-            $html = <<<HTML
-               <nav>
-                <a href="?action=a">Menu</a>
-               </nav>
-            HTML;
+          session_destroy();
+        $html = <<<HTML
+        <p>Déconnexion réussie.</p>
+        <nav>
+          <a href="?action=a">Retour à Menu</a>
+        </nav>;
+        HTML;
         }
         return $html;
     }

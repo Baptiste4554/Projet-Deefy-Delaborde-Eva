@@ -6,7 +6,8 @@ use iutnc\deefy\exception\AuthnException;
 use iutnc\deefy\repository\DeefyRepository;
 
 class AuthnProvider {
- 
+    
+
     // solidité mot de passe
     public static function checkPasswordStrength(string $pass, int $minimumLength = 10): bool {
         $length = (strlen($pass) >= $minimumLength);
@@ -53,7 +54,6 @@ class AuthnProvider {
         if (!$user || !password_verify($password, $user['passwd'])) {
             throw new AuthnException("Erreur d'authentification : identifiants invalides.");
         }
-
         $_SESSION['user'] = serialize(['email' => $email]);
     
         return (int) $user['id'];
