@@ -17,7 +17,8 @@ class DisplayPlaylistIDAction {
                 $playlist = $repository->findPlaylistById($playlistId);
                 if ($playlist) {
                     $renderer = new AudioListRenderer($playlist);
-                    return $renderer->render(2);
+                    $html = $renderer->render(2);
+                    return $html .= "<nav><a href=\"?action=playlist\">Retour</a></nav>";
                 } else {
                     return "<p>Playlist not found.</p>";
                 }
@@ -27,19 +28,6 @@ class DisplayPlaylistIDAction {
                     <a href=\"?action=accueil\">Retour</a>
                 </nav>";
             }
-        } else {
-            return <<<HTML
-            <form method="GET" action="Main.php">
-                <link rel="stylesheet" href="src/css.css">
-                <input type="hidden" name="action" value="displayplaylist">
-                <label for="playlistId">Entrer un numéro de playlist (ID):</label>
-                <input type="text" id="playlistId" name="id" required>
-                <button type="submit">Afficher</button>
-                <nav>
-                    <a href="?action=accueil">Retour</a>
-                </nav>
-            </form>
-            HTML;
         }
     }
 }

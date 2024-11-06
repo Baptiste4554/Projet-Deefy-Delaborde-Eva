@@ -20,9 +20,6 @@ class AddPlaylistAction extends Action {
               <div>
                 <input type="submit" value="Valider" />
               </div>
-              <nav>
-                <a href="?action=accueil">Retour</a>
-              </nav>
             </form>
             HTML;
         } else {
@@ -43,6 +40,6 @@ class AddPlaylistAction extends Action {
             $renderer = new AudioListRenderer($playlist);
             $html = $renderer->render();
         }
-        return $html;
+        return $html .= "<nav><a href=\"?action=accueil\">Retour</a></nav>";
     }
 }

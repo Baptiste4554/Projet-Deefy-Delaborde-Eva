@@ -21,8 +21,8 @@ class DefaultAction extends Action {
             <ul>
                 <li>Afficher toutes les playlists de l'utilisateur</li>
                 <li>Afficher les pistes d'une playlist</li>
-                <li>Ajouter une plylist vide</li>
-                <li>Ajouter une piste a la plylist créer</li>
+                <li>Ajouter une playlist vide</li>
+                <li>Ajouter une piste a la playlist créer</li>
             </ul>
         </body>
         </html>
