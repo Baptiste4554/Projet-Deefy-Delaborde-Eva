@@ -49,15 +49,13 @@ class AuthnProvider {
     
         return (int) $user['id'];
     }
-
+    // retourne l'utilisateur authentifie
     public static function getSignedInUser(): array {
         if (!isset($_SESSION['user'])) {
             throw new AuthnException("Aucun utilisateur authentifié.");
         }
-        $user = unserialize($_SESSION['user']);
-        if ($user === false || !is_array($user)) {
-            throw new AuthnException("Erreur de désérialisation des données utilisateur.");
-        }
+        $user =unserialize($_SESSION['user']);
+
         return $user;
     }
     
