@@ -25,7 +25,7 @@ class DisplayPlaylistIDAction {
             } catch (AuthnException $e) {
                 return "<p>Accès refusé : vous n'êtes pas le propriétaire de cette playlist.</p>
                 <nav>
-                    <a href=\"?action=accueil\">Retour</a>
+                    <a href=\"?action=playlist\">Retour</a>
                 </nav>";
             }
         }
