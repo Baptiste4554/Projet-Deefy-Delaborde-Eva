@@ -12,7 +12,7 @@ class DeconnectionAction extends Action {
             <form action="?action=deconnection" method="post">
               <link rel="stylesheet" href="src/css.css">
               <div>
-                <h2>Etes-vous sur de vouloir vous déconnecter ?</h2>
+                <p>Êtes-vous sur de vouloir vous déconnecter ?</p>
               </div>
               <div>
                 <input type="submit" value="Valider" />
