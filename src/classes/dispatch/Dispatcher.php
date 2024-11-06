@@ -10,6 +10,7 @@ use iutnc\deefy\action\DisplayPlaylistIDAction;
 use iutnc\deefy\action\SigninAction;
 use iutnc\deefy\action\AddUserAction;
 use iutnc\deefy\action\AccueilAction;
+use iutnc\deefy\action\DeconnectionAction;
 
 class Dispatcher {
 
@@ -45,6 +46,9 @@ class Dispatcher {
                 break;
             case 'add-user';
                 $actionObjet = new AddUserAction();
+                break;
+            case 'deconnection';
+                $actionObjet = new DeconnectionAction();
                 break;
             default:
                 $actionObjet = new DefaultAction();

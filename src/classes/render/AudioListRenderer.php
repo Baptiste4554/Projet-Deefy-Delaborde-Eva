@@ -38,9 +38,8 @@ class AudioListRenderer implements Renderer {
         $output = "<h2>{$this->audioList->nom}</h2>";
         $output .= "<ul>";
         foreach ($this->audioList->liste as $track) {
-            // Utilisation du chemin d'accès relatif à la racine du projet pour les fichiers audio
             $output .= "<li>{$track->titre} - {$track->nom}<br>";
-            $output .= "<audio controls><source src=\"/action/audio/{$track->nom}\" type=\"audio/mpeg\"></audio></li>";
+            $output .= "<audio controls><source src=\"webS3/projet/Projet-Deefy-Delaborde-Eva/src/classes/action/audio/{$track->nom}\" type=\"audio/mpeg\"></audio></li>";
         }
         $output .= "</ul>";
         $output .= "<p>Nombre de pistes : {$this->audioList->nbPiste}</p>";

@@ -12,7 +12,7 @@ class AccueilAction extends Action {
             <link rel="stylesheet" href="src/css.css">
             <nav>
                 <ul>
-                    <li><a href="./Main.php">Déconnexion</a></li>
+                    <li><a href="?action=deconnection">Déconnexion</a></li>
                     <li><a href="?action=playlist">Afficher toutes les playlists</a></li>
                     <li><a href="?action=displayplaylist">Afficher les pistes d'une playlist</a></li>
                     <li><a href="?action=add-playlist">Ajouter une playlist</a></li>

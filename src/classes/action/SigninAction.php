@@ -10,7 +10,7 @@ class SigninAction extends Action {
     public function execute(): string {
         if ($_SERVER['REQUEST_METHOD'] === 'GET'){
             $html = <<<HTML
-            <div clas ="tout">
+            <div class ="tout">
                 <div class="container">
                     <h2>Connexion</h2>
                     <form method="POST" action="Main.php?action=signin">
