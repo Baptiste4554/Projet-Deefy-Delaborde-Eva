@@ -14,7 +14,6 @@ class AccueilAction extends Action {
                 <ul>
                     <li><a href="?action=deconnection">Déconnexion</a></li>
                     <li><a href="?action=playlist">Afficher toutes les playlists</a></li>
-                    <li><a href="?action=displayplaylist">Afficher les pistes d'une playlist</a></li>
                     <li><a href="?action=add-playlist">Ajouter une playlist</a></li>
                     <li><a href="?action=add-track">Ajouter une piste</a></li>
                 </ul>

@@ -15,7 +15,7 @@ class DisplayPlaylistAction extends Action {
 
         $html = "<link rel=\"stylesheet\" href=\"src/css.css\"> <h2>Liste des playlists :</h2><ul>";
         foreach ($playlists as $playlist) {
-            $html .= "<li>" . htmlspecialchars($playlist['nom']) ."   -ID: ".htmlspecialchars($playlist['id']). "</li>";
+            $html .= "<li>" . htmlspecialchars($playlist['nom']) . "</li>". "<a href=\"?action=displayplaylist&id=".htmlspecialchars($playlist['id'])."\">Afficher</a>";
         }
 
         $html .= "</ul>";
