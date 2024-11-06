@@ -137,6 +137,17 @@ class DeefyRepository {
         $stmt->execute(['email' => $email]);
         return $stmt->fetch();
     }
+
+    public function getRoleByEmail(string $email): array {
+        $stmt = $this->pdo->prepare("SELECT id, role FROM user WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch();
+    }
+    public function etreProprioPlaylist(int $userId, int $playlistId): bool {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM user2playlist WHERE id_user = :userId AND id_pl = :playlistId");
+        $stmt->execute(['userId' => $userId, 'playlistId' => $playlistId]);
+        return (bool) $stmt->fetchColumn();
+    }
     
     public function getPDO(): PDO {
         return $this->pdo;
