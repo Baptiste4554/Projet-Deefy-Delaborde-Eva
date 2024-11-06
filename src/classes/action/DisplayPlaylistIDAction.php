@@ -9,6 +9,10 @@ use iutnc\deefy\exception\AuthnException;
 
 class DisplayPlaylistIDAction {
     public function execute(): string {
+
+        if (!isset($_SESSION['user'])) {
+            return "<p>Vous devez être connecté pour voir cette page.</p><nav><a href=\"?action=signin\">Se connecter</a></nav>";
+        }
         $playlistId = (int)($_GET['id'] ?? 0);
         if ($playlistId > 0) {
             try {

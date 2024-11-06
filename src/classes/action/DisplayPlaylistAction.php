@@ -8,6 +8,10 @@ use iutnc\deefy\repository\DeefyRepository;
 class DisplayPlaylistAction extends Action {
 
     public function execute(): string {
+
+        if (!isset($_SESSION['user'])) {
+            return "<p>Vous devez être connecté pour voir cette page.</p><nav><a href=\"?action=signin\">Se connecter</a></nav>";
+        }
         $repository = DeefyRepository::getInstance();
         $playlists = $repository->getAllPlaylists();
         $_SESSION['playlists'] = $playlists;

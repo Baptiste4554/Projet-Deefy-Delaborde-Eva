@@ -9,6 +9,10 @@ use iutnc\deefy\render\AudioListRenderer;
 class AddPodcastTrackAction extends Action {
 
     public function execute(): string {
+        if (!isset($_SESSION['user'])) {
+            return "<p>Vous devez être connecté pour voir cette page.</p><nav><a href=\"?action=signin\">Se connecter</a></nav>";
+        }
+
         if ($this->http_method === 'GET') {
             return $this->renderForm();
         } else {

@@ -7,6 +7,9 @@ use iutnc\deefy\action\Action;
 class AccueilAction extends Action {
 
     public function execute(): string {
+        if (!isset($_SESSION['user'])) {
+            return "<p>Vous devez être connecté pour voir cette page.</p><nav><a href=\"?action=signin\">Se connecter</a></nav>";
+        }
         return <<<HTML
         <form method="POST" action="Main.php?action=accueil">
             <link rel="stylesheet" href="src/css.css">
