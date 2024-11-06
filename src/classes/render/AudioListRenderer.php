@@ -25,25 +25,25 @@ class AudioListRenderer implements Renderer {
     }
 
     protected function renderAsCompact(): string {
-        $output = "<h2>{$this->audioList->nom}</h2>";
-        $output .= "<ul>";
+        $resultat= "<h2>{$this->audioList->nom}</h2>";
+        $resultat.= "<ul>";
         foreach ($this->audioList->liste as $track) {
-            $output .= "<li>{$track->titre}</li>";
+            $resultat.= "<li>{$track->titre}</li>";
         }
-        $output .= "</ul>";
-        return $output;
+        $resultat.= "</ul>";
+        return $resultat;
     }
 
     protected function renderAsLong(): string {
-        $output = "<h2>{$this->audioList->nom}</h2>";
-        $output .= "<ul>";
+        $resultat= "<h2>{$this->audioList->nom}</h2>";
+        $resultat.= "<ul>";
         foreach ($this->audioList->liste as $track) {
-            $output .= "<li>{$track->titre} - {$track->nom}<br>";
-            $output .= "<audio controls><source src=\"webS3/projet/Projet-Deefy-Delaborde-Eva/src/classes/action/audio/{$track->nom}\" type=\"audio/mpeg\"></audio></li>";
+            $resultat.= "<li>{$track->titre} - {$track->nom}<br>";
+            $resultat.= "<audio controls><source src=\"webS3/projet/Projet-Deefy-Delaborde-Eva/src/classes/action/audio/{$track->nom}\" type=\"audio/mpeg\"></audio></li>";
         }
-        $output .= "</ul>";
-        $output .= "<p>Nombre de pistes : {$this->audioList->nbPiste}</p>";
-        $output .= "<p>Durée totale : {$this->audioList->duree} secondes</p>";
-        return $output;
+        $resultat.= "</ul>";
+        $resultat.= "<p>Nombre de pistes : {$this->audioList->nbPiste}</p>";
+        $resultat.= "<p>Durée totale : {$this->audioList->duree} secondes</p>";
+        return $resultat;
     }
 }

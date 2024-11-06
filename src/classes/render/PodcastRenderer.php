@@ -13,7 +13,6 @@ class PodcastRenderer extends AudioTrackRenderer {
     protected function renderAsCompact() : string {
         return "<audio controls><source src=\"{$this->audioTrack->nom}\" type=\"audio/mpeg\"></audio>";
     }
-
     protected function renderAsLong() : string {
         $podcastTrack = $this->audioTrack;
         return "<audio controls><source src=\"{$podcastTrack->nom}\" type=\"audio/mpeg\"></audio><br>{$podcastTrack->titre} - {$podcastTrack->auteur} - {$podcastTrack->date}";

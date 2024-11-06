@@ -12,7 +12,7 @@ class AddPodcastTrackAction extends Action {
         if ($this->http_method === 'GET') {
             return $this->renderForm();
         } else {
-            return $this->handleFormSubmission();
+            return $this->verifAjoutTrack();
         }
     }
 
@@ -49,48 +49,50 @@ class AddPodcastTrackAction extends Action {
         HTML;
     }
 
-    private function handleFormSubmission(): string {
+    private function verifAjoutTrack(): string {
         if (!isset($_SESSION["Playlist"])) {
-            return "<div><p>Il n'y a pas de playlist enregistrée</p></div><nav><a href=\"?action=accueil\">Retour</a></nav>";
+            return $html= <<<HTML
+            <div><p>Il n'y a pas de playlist enregistrée</p></div><nav><a href="?action=accueil">Retour</a></nav>
+            HTML;
         }
 
-        $titre = filter_var($_POST["titre"], FILTER_SANITIZE_SPECIAL_CHARS);
-        $chemin = filter_var($_POST["chemin"], FILTER_SANITIZE_SPECIAL_CHARS);
-        $auteur = filter_var($_POST["auteur"], FILTER_SANITIZE_SPECIAL_CHARS);
-        $date = filter_var($_POST["date"], FILTER_SANITIZE_SPECIAL_CHARS);
+        $titre= filter_var($_POST["titre"], FILTER_SANITIZE_SPECIAL_CHARS);
+        $chemin= filter_var($_POST["chemin"], FILTER_SANITIZE_SPECIAL_CHARS);
+        $auteur= filter_var($_POST["auteur"], FILTER_SANITIZE_SPECIAL_CHARS);
+        $date= filter_var($_POST["date"], FILTER_SANITIZE_SPECIAL_CHARS);
         $genre = filter_var($_POST["genre"], FILTER_SANITIZE_SPECIAL_CHARS);
-        $duree = filter_var($_POST["duree"], FILTER_VALIDATE_INT);
+        $duree= filter_var($_POST["duree"], FILTER_VALIDATE_INT);
 
         $upload_dir = __DIR__ . "/audio/";
         $file_name = uniqid();
         $tmp = $_FILES["fichier"]["tmp_name"];
 
-        if ($this->isValidFileUpload($_FILES["fichier"])) {
+        if ($this->verifMp3($_FILES["fichier"])) {
             $dest = $upload_dir . $file_name . ".mp3";
             if (move_uploaded_file($tmp, $dest)) {
-                $html = "<div>Upload ok</div>";
+                $html = "<div>téléchargement ok</div>";
             } else {
-                $html = "<div>Upload fail</div>";
+                $html = "<div>téléchargement erreur</div>";
             }
         } else {
-            $html = "<div>Upload fail: mp3 requis</div>";
+            $html = "<div>téléchargement erreur: mp3 requis</div>";
         }
 
         $repo = DeefyRepository::getInstance();
-        $trackID = $repo->saveTrack($titre, $genre, $duree, $file_name . ".mp3", $auteur, $date, 'P');
+        $trackID= $repo->saveTrack($titre, $genre, $duree, $file_name . ".mp3", $auteur, $date, 'P');
 
         $playlist = $_SESSION["Playlist"];
         $playlist->ajouterPiste(new PodcastTrack($titre, $chemin, $auteur, $date, $genre, $duree));
         $_SESSION["Playlist"] = $playlist;
         $renderer = new AudioListRenderer($playlist);
-        $playlistId = $_SESSION['playlistId'];
+        $playlistId= $_SESSION['playlistId'];
         $repo->addTrackToPlaylist($playlistId, $trackID);
 
         $html .= $renderer->render();
         return $html .= "<nav><a href=\"?action=accueil\">Retour</a></nav>";
     }
 
-    private function isValidFileUpload(array $file): bool {
+    private function verifMp3(array $file): bool {
         return ($file["error"] === UPLOAD_ERR_OK)
             && ($file["type"] === "audio/mpeg")
             && (str_ends_with($file["name"], '.mp3'));

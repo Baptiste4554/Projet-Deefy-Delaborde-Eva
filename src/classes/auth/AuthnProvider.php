@@ -27,28 +27,19 @@ class AuthnProvider {
             throw new AuthnException("Email invalide.");
         }
         $repo = DeefyRepository::getInstance();
-        $stmt = $repo->getPDO()->prepare("SELECT COUNT(*) FROM user WHERE email = :email");
-        $stmt->execute(['email' => $email]);
-        $exists = $stmt->fetchColumn();
+        $exists = $repo->emailExists($email);   
         if ($exists) {
             throw new AuthnException("Email déjà utilisé.");
         }
         $hash = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
-        $stmt = $repo->getPDO()->prepare("INSERT INTO user (email, passwd, role) VALUES (:email, :passwd, :role)");
-        $stmt->execute([
-            'email' => $email,
-            'passwd' => $hash,
-            'role' => 1 
-        ]);
+        $repo->insertUser($email, $hash, 1);
     }
 
 
     // authentification d'un utilisateur
     public static function signin(string $email, string $password): int {
         $repo = DeefyRepository::getInstance();
-        $stmt = $repo->getPDO()->prepare("SELECT id, passwd FROM user WHERE email = :email");
-        $stmt->execute(['email' => $email]);
-        $user = $stmt->fetch();
+        $user = $repo->getUserByEmail($email);
     
 
         if (!$user || !password_verify($password, $user['passwd'])) {

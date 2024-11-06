@@ -9,7 +9,6 @@ class AlbumTrackRenderer extends AudioTrackRenderer {
     public function __construct(AudioTrack $albumTrack) {
         parent::__construct($albumTrack);
     }
-
     protected function renderAsCompact() : string {
         return "<audio controls><source src=\"{$this->audioTrack->nom}\" type=\"audio/mpeg\"></audio>";
     }

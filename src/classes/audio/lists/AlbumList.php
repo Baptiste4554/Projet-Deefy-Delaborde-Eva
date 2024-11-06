@@ -8,7 +8,6 @@ class AlbumList extends AudioList {
 
     protected string $artiste;
     protected string $date;
-
     public function __construct(string $nom, array $liste) {
         parent::__construct($nom, $liste);
     }

@@ -8,7 +8,7 @@ use iutnc\deefy\render\AudioListRenderer;
 class AddPlaylistAction extends Action {
 
     public function execute(): string {
-        if ($this->http_method === 'GET') {
+        if($this->http_method === 'GET') {
 
             $html = <<<HTML
             <form action="?action=add-playlist" method="post">
@@ -25,7 +25,7 @@ class AddPlaylistAction extends Action {
         } else {
             $nom = filter_var($_POST["nom"], FILTER_SANITIZE_SPECIAL_CHARS);
 
-            $repo = DeefyRepository::getInstance();
+            $repo= DeefyRepository::getInstance();
             $playlistId = $repo->saveEmptyPlaylist($nom);
 
             if (isset($_SESSION['user_id'])) {

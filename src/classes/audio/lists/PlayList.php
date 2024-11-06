@@ -29,7 +29,6 @@ class PlayList extends AudioList {
             }
         }
     }
-
     private function pisteExiste(AudioTrack $piste): bool {
         foreach ($this->liste as $existingPiste) {
             if ($existingPiste->titre === $piste->titre && $existingPiste->nom === $piste->nom) {

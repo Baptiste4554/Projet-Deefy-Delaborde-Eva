@@ -43,7 +43,7 @@ class AddUserAction extends Action {
         HTML;
         
 
-        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'add-user') {
+        } elseif($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'add-user') {
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $password = $_POST['passwd'];
             $confirmPassword = $_POST['confirm_passwd'];
@@ -56,11 +56,10 @@ class AddUserAction extends Action {
                 AuthnProvider::register($email, $password);
                 $html = "Inscription réussie ! Vous pouvez maintenant vous connecter.";
             } catch (AuthnException $e) {
-                $html = "Erreur au moment  de l'inscription : " . $e->getMessage();
+                $html = $e->getMessage();
 
             }
         }
         return  $html;
-
     }
 }

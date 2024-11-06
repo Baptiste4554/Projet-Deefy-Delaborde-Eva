@@ -28,7 +28,7 @@ class DeconnectionAction extends Action {
         <p>Déconnexion réussie.</p>
         <nav>
           <a href="?action=a">Retour à Menu</a>
-        </nav>;
+        </nav>
         HTML;
         }
         return $html;

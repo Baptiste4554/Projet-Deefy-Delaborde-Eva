@@ -117,6 +117,27 @@ class DeefyRepository {
         return $playlist;
     }
 
+    public function emailExists(string $email): bool {
+        $stmt = $this->getPDO()->prepare("SELECT COUNT(*) FROM user WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        return (bool) $stmt->fetchColumn();
+    }
+
+    public function insertUser(string $email, string $hash, int $role): void {
+        $stmt = $this->getPDO()->prepare("INSERT INTO user (email, passwd, role) VALUES (:email, :passwd, :role)");
+        $stmt->execute([
+            'email' => $email,
+            'passwd' => $hash,
+            'role' => $role
+        ]);
+    }
+
+    public function getUserByEmail(string $email): array {
+        $stmt = $this->getPDO()->prepare("SELECT id, passwd FROM user WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch();
+    }
+    
     public function getPDO(): PDO {
         return $this->pdo;
     }

@@ -1,5 +1,4 @@
 <?php
-declare (strict_types=1);
 
 namespace iutnc\deefy\audio\tracks;
 
@@ -15,7 +14,6 @@ abstract class AudioTrack {
         $this->genre = $genre;
         $this->duree = $duree;
     }
-
     public function __toString() : string {
         return json_encode($this);
     }

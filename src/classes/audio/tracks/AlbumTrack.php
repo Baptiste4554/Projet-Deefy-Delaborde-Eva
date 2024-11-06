@@ -20,7 +20,6 @@ class AlbumTrack extends AudioTrack {
     public function setArtiste(string $artiste): void {
         $this->artiste = $artiste;
     }
-
     public function setAlbum(string $album): void {
         $this->album = $album;
     }
@@ -28,7 +27,6 @@ class AlbumTrack extends AudioTrack {
     public function setAnnee(int $annee): void {
         $this->annee = $annee;
     }
-
     public function setNumPiste(int $numPiste): void {
         $this->numPiste = $numPiste;
     }
